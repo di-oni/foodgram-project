@@ -1,0 +1,15 @@
+**
+
+!api
+!assets
+!foodgram
+!recipes
+!templates
+!users
+!manage.py
+!requirements.txt
+!Dockerfile
+!docker-compose.yaml
+
+
+

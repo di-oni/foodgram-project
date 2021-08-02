@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}<title>Продуктовый помощник</title>{% endblock %}
+{% block style %}<link rel="stylesheet" href="{% static 'pages/index.css' %}">{% endblock %}
+
+{% block content %}
+<main class="main container-center">
+    <div class="custom-center-block">
+        <h1 class="main__title">Продуктовый помощник</h1>
+        <p class="custom-text-block">Foodgram - это сервис, позволяющий Вам поделиться своими рецептами, сохранять понравившиеся рецепты и подписываться на их авторов.<br/> 
+            Добавив рецепты в список покупок, вы сможете распечать общий список всех необходимых ингредиентов.</p>
+    </div>
+</main>
+{% endblock %}

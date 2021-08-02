@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}<title>Технологии</title>{% endblock %}
+{% block style %}<link rel="stylesheet" href="{% static 'pages/index.css' %}">{% endblock %}
+
+{% block content %}
+<main class="main container-center">
+    <div class="custom-center-block">
+        <h1 class="main__title">Технологии</h1>
+        <p class="custom-text-block">Back-end выполнен с использованием веб-фреймворка Django.<br/>
+        Для разработки Front-end использовались HTML, CSS и JavaScript</p>
+    </div>
+</main>
+{% endblock %}

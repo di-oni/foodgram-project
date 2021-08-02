@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tags_and_filters %}
+{% load thumbnail %}
+
+{% block title %}<title>Foodgram | Список покупок</title>{% endblock %}
+{% block style %}<link rel="stylesheet" href="{% static 'pages/shopList.css' %}">{% endblock %}
+
+{% block content %}
+<main class="main container">
+    <div class="main__header">
+        <h1 class="main__title">Список покупок</h1>
+    </div>
+    {% if recipes %}
+        <div class="card-list card-list_column">
+            {% for recipe in recipes %}
+            <ul class="shopping-list">
+                <li class="shopping-list__item" data-id="{{ recipe.id }}">
+                    <div class="recipe recipe_reverse">
+                        {% thumbnail recipe.photo "1000x1000" crop="center" as photo %}
+                        <img src="{{ photo.url }}" alt="{{ recipe.title }}" class="recipe__image recipe__image_big">
+                        {% endthumbnail %}
+                        <h3 class="recipe__title">{{ recipe.title }}</h3>
+                        <p class="recipe__text"><span class="icon-time"></span> {{ recipe.cooking_time }} мин.</p>
+                    </div>
+                    <a href="{% url 'delete_purchase' recipe.id %}" class="shopping-list__button link">Удалить</a>
+                </li>
+            </ul>
+            {% endfor %}
+            <a href="{% url 'print_pdf' %}"><button class="button button_style_blue">Скачать список</button></a>
+        </div>
+    {% else %}
+        {% include "includes/custom_page.html" with message="Корзина пуста" %}  
+    {% endif %}
+</main>
+<script src="{% static 'js/config/config.js' %}"></script>
+<script src="{% static 'js/components/Header.js' %}"></script>
+<script src="{% static 'js/components/ShopList.js' %}"></script>
+<script src="{% static 'js/api/Api.js' %}"></script>
+<script src="{% static 'js/shopList.js' %}"></script>
+{% endblock %}
+

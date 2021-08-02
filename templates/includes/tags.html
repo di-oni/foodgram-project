@@ -1,0 +1,11 @@
+{% load tags_and_filters %}
+
+{% for tag in tags  %}
+    {% with request_tags=request|get_tags %}
+        <li class="tags__item">
+            <a id="{{ tag.title }}" class="tags__checkbox tags__checkbox_style_{{ tag.colour }} 
+            {% if tag.title in request_tags or not request_tags %} tags__checkbox_active {% endif %}" href="{{ the_url }}?{{ request|request_get:tag.title }}"></a>
+            <span class="tags__label"> {{ tag.display_name }} </span>
+        </li>
+    {% endwith %}
+{% endfor %}

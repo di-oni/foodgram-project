@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tags_and_filters %}
+
+{% block title %}<title>Регистрация</title>{% endblock %}
+{% block style %}<link rel="stylesheet" href="{% static 'pages/form.css' %}">{% endblock %}
+
+{% block content %}
+<main class="main container">
+    <div class="main__header">
+        <h1 class="main__title">Регистрация</h1>
+    </div>
+    <div class="form-container">
+        <form class="form" method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form__group">
+                    <label for="{{ field.id_for_label }}" class="form__label">{{ field.label }}</label>
+                    <div class="form__field-group">
+                        {% if field.html_name == 'email' %}
+                            <input type="email" name="{{ field.html_name }}" id="{{ field.id_for_label }}" class="form__input">
+                        {% elif field.html_name|startswith:'password' %}
+                            <input type="password" name="{{ field.html_name }}" id="{{ field.id_for_label }}" class="form__input">
+                        {% else %}
+                            <input type="text" name="{{ field.html_name }}" id="{{ field.id_for_label }}" class="form__input">
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <span class="form__error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="form__footer">
+                <button class="button button_style_blue">Создать аккаунт</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}
