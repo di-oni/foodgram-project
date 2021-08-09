@@ -3,8 +3,8 @@
 {% load tags_and_filters %}
 {% load thumbnail %}
 
-{% block title %}<title>Foodgam | Мои подписки</title>{% endblock %}
-{% block style %}<link rel="stylesheet" href="{% static 'pages/myFollow.css' %}">{% endblock %}
+{% block title %}Мои подписки{% endblock %}
+{% block style %}<link rel="stylesheet" href="{% static "pages/myFollow.css" %}">{% endblock %}
 
 {% block content %}
 {% csrf_token %}
@@ -34,7 +34,7 @@
                         {% endfor %}
                         {% if author.recipes.count > 3 %}
                         <li class="card-user__item">
-                            <a href="{% url 'profile' author.username %}" class="card-user__link link">
+                            <a href="{% url "profile" author.username %}" class="card-user__link link">
                                 {% with remaining=author.recipes.count|add:"-3" %}
                                     Еще {{ remaining }} {{ "рецепт"|decline:remaining }}...
                                 {% endwith %}
@@ -52,13 +52,13 @@
         {% include "includes/custom_page.html" with message="Вы не подписаны ни на одного пользователя" %}
     {% endif %}
 </main>
-<script src="{% static 'js/components/MainCards.js' %}"></script>
-<script src="{% static 'js/config/config.js' %}"></script>
-<script src="{% static 'js/components/Header.js' %}"></script>
-<script src="{% static 'js/api/Api.js' %}"></script>
-<script src="{% static 'js/components/MyFollow.js' %}"></script>
-<script src="{% static 'js/components/Subscribe.js' %}"></script>
-<script src="{% static 'js/myFollow.js' %}"></script>
+<script src="{% static "js/components/MainCards.js" %}"></script>
+<script src="{% static "js/config/config.js" %}"></script>
+<script src="{% static "js/components/Header.js" %}"></script>
+<script src="{% static "js/api/Api.js" %}"></script>
+<script src="{% static "js/components/MyFollow.js" %}"></script>
+<script src="{% static "js/components/Subscribe.js" %}"></script>
+<script src="{% static "js/myFollow.js" %}"></script>
 {% if page.has_other_pages %}
     {% include "includes/paginator.html" with items=page paginator=paginator %}
 {% endif %}

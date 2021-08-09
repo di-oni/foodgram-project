@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
-
-{% block title %}Об авторе{% endblock %}
+{% block title %}Ошибка{% endblock %}
 {% block style %}<link rel="stylesheet" href="{% static "pages/index.css" %}">{% endblock %}
 
 {% block content %}
 <main class="main container-center">
     <div class="custom-center-block">
-        <h1 class="main__title">Об авторе</h1>
-        <p class="custom-text-block">Github:&nbsp;<a href="https://github.com/di-oni">Дмитрий Онищенко</a></p>
+        <p class="custom-text-block">404: Страница не найдена</p>
+        <a class="custom-text-block" href="{% url "index" %}">Перейти на главную</a>
     </div>
 </main>
 {% endblock %}

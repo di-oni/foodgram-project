@@ -1,11 +1,12 @@
+{% extends "base.html" %}
 {% load static %}
-
+{% block title %}Ошибка{% endblock %}
 {% block style %}<link rel="stylesheet" href="{% static "pages/index.css" %}">{% endblock %}
 
 {% block content %}
 <main class="main container-center">
     <div class="custom-center-block">
-        <p class="custom-text-block">{{ message }}</p>
+        <p class="custom-text-block">500: Внутренняя ошибка сервера</p>
         <a class="custom-text-block" href="{% url "index" %}">Перейти на главную</a>
     </div>
 </main>

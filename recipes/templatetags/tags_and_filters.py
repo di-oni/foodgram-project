@@ -1,5 +1,5 @@
 from django import template
-from django.urls import resolve
+
 from recipes.models import Favourite, Follow, Purchase
 
 register = template.Library()
@@ -7,8 +7,9 @@ register = template.Library()
 
 @register.simple_tag 
 def current_url(request):
-    current_url = request.resolver_match.view_name
-    return current_url
+    if request.resolver_match:
+        current_url = request.resolver_match.view_name
+        return current_url
 
 
 @register.filter 
@@ -19,28 +20,28 @@ def decline(word, amount):
         return word
     if amount_by_ten in [2, 3, 4]:
         if amount_by_hundred not in [11, 12, 13, 14]:
-            return word + 'а'
+            return word + "а"
         else:
-            return word + 'ов'
+            return word + "ов"
     elif amount_by_ten in [5, 6, 7, 8, 9, 0]:
-        return word + 'ов'
+        return word + "ов"
 
 
 @register.filter 
 def request_get(request, tag):
-    tags = request.GET.getlist('tags')
+    tags = request.GET.getlist("tags")
     if tag in tags:
-        tags.remove(tag)
+        tags = [item for item in tags if item != tag]
     else:
         tags.append(tag)
     new = request.GET.copy()
-    new.setlist('tags', tags)
+    new.setlist("tags", tags)
     return new.urlencode()
 
 
 @register.filter 
 def get_tags(request):
-    return request.GET.getlist('tags')
+    return request.GET.getlist("tags")
 
 
 @register.simple_tag 

@@ -4,13 +4,13 @@
 
 {% block content %}
 <div class="card"  data-id="{{ recipe.id }}">
-    <a href="{% url 'view_recipe' recipe.id %}" class="link" target="_blank">
+    <a href="{% url "view_recipe" recipe.id %}" class="link" target="_blank">
         {% thumbnail recipe.photo "1000x1000" quality=100 upscale=True as photo %}
         <img src="{{ photo.url }}" alt="{{ recipe.title }}" class="card__image">
         {% endthumbnail %}
     </a>
     <div class="card__body">
-        <a class="card__title link" href="{% url 'view_recipe' recipe.id %}" target="_blank">{{ recipe.title }}</a>
+        <a class="card__title link" href="{% url "view_recipe" recipe.id %}" target="_blank">{{ recipe.title }}</a>
         <ul class="card__items">
             {% for tag in recipe.tags.all %}
                 <li class="card__item"><span class="badge badge_style_{{ tag.colour }}">{{ tag.display_name }}</span></li>
@@ -18,7 +18,7 @@
         </ul>
         <div class="card__items card__items_column">
             <p class="card__text"><span class="icon-time"></span> {{ recipe.cooking_time }} мин.</p>
-            <p class="card__text"><span class="icon-user"></span> <a href="{% url 'profile' recipe.author.username %}" style="color: black">{{ recipe.author.get_full_name }}</a></p>
+            <p class="card__text"><span class="icon-user"></span> <a href="{% url "profile" recipe.author.username %}" style="color: black">{{ recipe.author.get_full_name }}</a></p>
         </div>
     </div>
     <div class="card__footer">

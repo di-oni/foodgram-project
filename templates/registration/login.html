@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}<title>Войти на сайт</title>{% endblock %}
-{% block style %}<link rel="stylesheet" href="{% static 'pages/form.css' %}">{% endblock %}
+{% block title %}Войти на сайт{% endblock %}
+{% block style %}<link rel="stylesheet" href="{% static "pages/form.css" %}">{% endblock %}
 
 {% block content %}
 <main class="main container">
@@ -10,7 +10,7 @@
         <h1 class="main__title">Войти на сайт</h1>
     </div>
     <div class="form-container">
-        <form class="form" method="post" action="{% url 'login' %}">
+        <form class="form" method="post" action="{% url "login" %}">
             {% csrf_token %}
             <div class="form__group">
                 <label for="id_username" class="form__label">Имя</label>
@@ -30,7 +30,7 @@
             </div>
             <div class="form__footer">
                 <button type="submit" class="button button_style_blue">Войти</button>
-                <a href="{% url 'password_reset' %}" class="form__forgot-link">Забыли пароль?</a>
+                <a href="{% url "password_reset" %}" class="form__forgot-link">Забыли пароль?</a>
             </div>
         </form>
     </div>

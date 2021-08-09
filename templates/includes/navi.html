@@ -6,27 +6,27 @@
     {% if user.is_authenticated %}
         <div class="nav__container container">
             <ul class="nav__items list">
-                <li class="nav__item {% if current_url == 'index' %} nav__item_active {% endif %}"><a href="{% url 'index' %}" class="nav__link link">Рецепты</a></li>
-                <li class="nav__item {% if current_url == 'subscriptions' %} nav__item_active {% endif %}"><a href="{% url 'subscriptions' %}" class="nav__link link">Мои подписки</a></li>
-                <li class="nav__item {% if current_url == 'new_recipe' %} nav__item_active {% endif %}"><a href="{% url 'new_recipe' %}" class="nav__link link">Создать рецепт</a></li>
-                <li class="nav__item {% if current_url == 'favorites' %} nav__item_active {% endif %}"><a href="{% url 'favorites' %}" class="nav__link link">Избранное</a></li>
-                <li class="nav__item {% if current_url == 'purchases' %} nav__item_active {% endif %}"><a href="{% url 'purchases' %}" class="nav__link link">Список покупок</a> <span class="badge badge_style_blue nav__badge" id="counter">{% purchases_amount request.user.id %}</span></li>
+                <li class="nav__item {% if current_url == "index" %} nav__item_active {% endif %}"><a href="{% url "index" %}" class="nav__link link">Рецепты</a></li>
+                <li class="nav__item {% if current_url == "subscriptions" %} nav__item_active {% endif %}"><a href="{% url "subscriptions" %}" class="nav__link link">Мои подписки</a></li>
+                <li class="nav__item {% if current_url == "new_recipe" %} nav__item_active {% endif %}"><a href="{% url "new_recipe" %}" class="nav__link link">Создать рецепт</a></li>
+                <li class="nav__item {% if current_url == "favorites" %} nav__item_active {% endif %}"><a href="{% url "favorites" %}" class="nav__link link">Избранное</a></li>
+                <li class="nav__item {% if current_url == "purchases" %} nav__item_active {% endif %}"><a href="{% url "purchases" %}" class="nav__link link">Список покупок</a> <span class="badge badge_style_blue nav__badge" id="counter">{% purchases_amount request.user.id %}</span></li>
             </ul>
             <ul class="nav__items list">
-                <li class="nav__item"><a href="{% url 'index' %}" class="nav__link link"></a>{{ user }}</a></li>
-                <li class="nav__item {% if current_url == 'password_change' %} nav__item_active {% endif %} "><a href="{% url 'password_change' %}" class="nav__link link">Изменить пароль</a></li>
-                <li class="nav__item"><a href="{% url 'logout' %}" class="nav__link link">Выход</a></li>
+                <li class="nav__item"><a href="{% url "index" %}" class="nav__link link"></a>{{ user }}</a></li>
+                <li class="nav__item {% if current_url == "password_change" %} nav__item_active {% endif %} "><a href="{% url "password_change" %}" class="nav__link link">Изменить пароль</a></li>
+                <li class="nav__item"><a href="{% url "logout" %}" class="nav__link link">Выход</a></li>
             </ul>
         </div>
     {% else %}
         <div class="nav__container container">
             <ul class="nav__items list">
-                <li class="nav__item {% if current_url == 'index' %} nav__item_active {% endif %}"><a href="{% url 'index' %}" class="nav__link link">Рецепты</a></li>
-                <li class="nav__item {% if current_url == 'purchases' %} nav__item_active {% endif %}"><a href="{% url 'purchases' %}" class="nav__link link">Список покупок <span class="badge badge_style_blue nav__badge" id="counter">{% purchases_amount request.user.id %}</span></a></li>
+                <li class="nav__item {% if current_url == "index" %} nav__item_active {% endif %}"><a href="{% url "index" %}" class="nav__link link">Рецепты</a></li>
+                <li class="nav__item {% if current_url == "purchases" %} nav__item_active {% endif %}"><a href="{% url "purchases" %}" class="nav__link link">Список покупок <span class="badge badge_style_blue nav__badge" id="counter">{% purchases_amount request.user.id %}</span></a></li>
             </ul>
             <ul class="nav__items list">
-                <li class="nav__item {% if current_url == 'login' %} nav__item_active {% endif %}"><a href="{% url 'login' %}" class="nav__link link">Войти</a></li>
-                <li class="nav__item {% if current_url == 'signup' %} nav__item_active {% endif %}"><a href="{% url 'signup' %}" class="button button_style_blue">Создать аккаунт</a></li>
+                <li class="nav__item {% if current_url == "login" %} nav__item_active {% endif %}"><a href="{% url "login" %}" class="nav__link link">Войти</a></li>
+                <li class="nav__item {% if current_url == "signup" %} nav__item_active {% endif %}"><a href="{% url "signup" %}" class="button button_style_blue">Создать аккаунт</a></li>
             </ul>
         </div>
     {% endif %}

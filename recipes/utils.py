@@ -4,9 +4,9 @@ from recipes.models import Ingredient, IngredientAmount, Tag
 def get_ingredients(request):
     ingredients = {}
     for key in request.POST:
-        if key.startswith('nameIngredient'):
-            count = key.split('_')[1]
-            value = request.POST[f'valueIngredient_{count}']
+        if key.startswith("nameIngredient"):
+            count = key.split("_")[1]
+            value = request.POST[f"valueIngredient_{count}"]
             ingredients[request.POST[key]] = value
     return ingredients
 
