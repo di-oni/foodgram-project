@@ -2,6 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "foodgram.settings")
 
 load_dotenv()
@@ -13,6 +14,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = True
+
 THUMBNAIL_DEBUG = True
 
 ALLOWED_HOSTS = [
@@ -79,7 +81,6 @@ DATABASES = {
     }
 }
 
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -94,7 +95,6 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-
 
 LANGUAGE_CODE = "ru"
 

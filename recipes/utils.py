@@ -1,4 +1,12 @@
-from recipes.models import Ingredient, IngredientAmount, Tag
+from recipes.models import IngredientAmount, Tag
+
+
+def filtered_by_tags(request, recipes):
+    """ Функция для фильтрации рецептов по тегам """
+    get_tags = request.GET.getlist("tags")
+    if get_tags:
+        recipes = recipes.filter(tags__title__in=get_tags).distinct()
+    return recipes
 
 
 def get_ingredients(request):
@@ -19,6 +27,7 @@ def get_tags(request):
         if item in data:
             tags.append(item)
     return tags
+
 
 def total_ingredients(user_id):
     cart = {}

@@ -10,15 +10,7 @@ from reportlab.pdfgen import canvas
 
 from .forms import RecipeForm
 from .models import Follow, IngredientAmount, Purchase, Recipe, Tag, User
-from .utils import total_ingredients
-
-
-def filtered_by_tags(request, recipes):
-    """ Функция для фильтрации рецептов по тегам """
-    get_tags = request.GET.getlist("tags")
-    if get_tags:
-        recipes = recipes.filter(tags__title__in=get_tags).distinct()
-    return recipes
+from .utils import filtered_by_tags, total_ingredients
 
 
 def index(request):

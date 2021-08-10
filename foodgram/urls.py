@@ -6,6 +6,7 @@ from django.urls import include, path
 
 from . import views
 
+
 handler404 = "foodgram.views.page_not_found"
 handler500 = "foodgram.views.server_error"
 

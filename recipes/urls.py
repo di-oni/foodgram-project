@@ -2,6 +2,7 @@ from django.urls import include, path
 
 from . import views
 
+
 profile_urls = [
     path("<str:username>/", views.view_profile, name="profile"),
 ]

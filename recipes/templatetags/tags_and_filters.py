@@ -2,6 +2,7 @@ from django import template
 
 from recipes.models import Favourite, Follow, Purchase
 
+
 register = template.Library()
 
 
