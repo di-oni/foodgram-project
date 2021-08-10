@@ -10,6 +10,7 @@ def filtered_by_tags(request, recipes):
 
 
 def get_ingredients(request):
+    """ Функция для получения ингредиентов из запроса """
     ingredients = {}
     for key in request.POST:
         if key.startswith("nameIngredient"):
@@ -20,6 +21,7 @@ def get_ingredients(request):
 
 
 def get_tags(request):
+    """ Функция для получения тэгов из запроса """
     tags = []
     data = request.POST
     tag_list = [item.title for item in Tag.objects.all()]
@@ -30,6 +32,7 @@ def get_tags(request):
 
 
 def total_ingredients(user_id):
+    """ Функция для получения ингредиетов для рецептов в списке """   
     cart = {}
     cart_as_text = []
     ingredients = IngredientAmount.objects.filter(
