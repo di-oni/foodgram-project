@@ -1,10 +1,12 @@
 import io
+import os
 
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from django.core.paginator import Paginator
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase import pdfmetrics, ttfonts
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 
@@ -158,7 +160,10 @@ def print_pdf(request):
     buffer = io.BytesIO()
     pdf = canvas.Canvas(buffer)
     pdf.setLineWidth(170)
-    pdfmetrics.registerFont(TTFont("TNR", "times.ttf"))
+    font = ttfonts.TTFont("TNR", os.path.join(settings.BASE_DIR,
+                                              "static", "fonts",
+                                              "times.ttf"))
+    pdfmetrics.registerFont(font)
     pdf.setFont("TNR", 28)
     pdf.drawCentredString(300, 700, title)
     pdf.setFont("TNR", 14)
