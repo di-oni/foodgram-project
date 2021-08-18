@@ -12,7 +12,7 @@
             {% url "profile" username=author.username as the_url %}
             {% include "includes/tags.html" with tags=tags request=request the_url=the_url %}
     </div>
-    {% if user.is_authenticated and user != author %}
+    {% if request.user.is_authenticated and request.user != author %}
     {% is_followed author.id request.user as followed %}
         {% if followed %}
             <div class="author-subscribe" data-author="{{ author.id }}">

@@ -1,6 +1,6 @@
 from django import template
 
-from recipes.models import Favourite, Follow, Purchase
+from recipes.models import Favourite, Follow, Purchase, Tag
 
 
 register = template.Library()
@@ -42,7 +42,10 @@ def request_get(request, tag):
 
 @register.filter 
 def get_tags(request):
-    return request.GET.getlist("tags")
+    tags = request.GET.getlist("tags")
+    if len(tags) == 3:
+        tags.clear()
+    return tags
 
 
 @register.simple_tag 
@@ -70,3 +73,10 @@ def startswith(text, starts):
     if isinstance(text, str):
         return text.startswith(starts)
     return False
+
+
+@register.filter
+def tags_for_page(tags):
+
+    tags = "".join([f"&tags={tag}" for tag in tags])
+    return tags

@@ -9,7 +9,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 
 from .forms import RecipeForm
-from .models import Follow, IngredientAmount, Purchase, Recipe, Tag, User
+from .models import IngredientAmount, Purchase, Recipe, Tag, User
 from .utils import filtered_by_tags, total_ingredients
 
 
@@ -31,26 +31,19 @@ def index(request):
 
 def view_recipe(request, recipe_id):
     """ View-функция для отображения страницы рецепта """
-    user = request.user
     recipe = get_object_or_404(Recipe, id=recipe_id) 
-    author = recipe.author
     context = {
         "recipe": recipe,
     }
-    if user.is_authenticated: 
-        following = Follow.objects.filter(user=user, author=author) 
-        context.update({"following": following})
     return render(request, "recipe.html", context)          
 
 
-@login_required
 def view_profile(request, username):
     """ View-функция для отображения профиля пользователя """
     recipes = Recipe.objects.filter(
         author__username=username).order_by("-pub_date")
     recipes = filtered_by_tags(request, recipes)
     tags = Tag.objects.all()
-    user = request.user 
     author = get_object_or_404(User, username=username) 
     paginator = Paginator(recipes, 6) 
     page_number = request.GET.get("page") 
@@ -60,10 +53,7 @@ def view_profile(request, username):
         "page": page, 
         "paginator": paginator, 
         "tags": tags,
-    } 
-    if user.is_authenticated: 
-        following = Follow.objects.filter(author=author, user=user) 
-        context.update({"following": following})         
+    }        
     return render(request, "profile.html", context)
 
 

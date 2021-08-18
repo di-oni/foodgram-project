@@ -1,7 +1,8 @@
-from decimal import Decimal
-
 from django import forms
+from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
+
+from decimal import Decimal
 
 from .models import Ingredient, IngredientAmount, Recipe, Tag
 from .utils import get_ingredients
@@ -42,18 +43,29 @@ class RecipeForm(forms.ModelForm):
             "cooking_time": "Время приготовления",
         } 
     
+    def clean(self):
+        cleaned_data = super().clean()
+        ingredients = get_ingredients(self.data)
+        if not ingredients:
+            self.add_error(None, f'Обязательное поле')
+        for name, amount in ingredients.items():
+            if Decimal(amount) <= 0:
+                self.add_error(None, f'Количество ингредиента "{name}" \
+                               должно быть больше нуля')
+        return cleaned_data
+
     def save(self, request, commit=True):
-        instance = super().save(commit=False)
+        instance = super(RecipeForm, self).save(commit=False)
         instance.author = request.user 
-        instance.save()
+        if commit:
+            instance.save()
         ingredients = get_ingredients(request)
         items = []
-        for name, amount in ingredients.items():
+        for name, amount in ingredients:
             ingredient = get_object_or_404(Ingredient, name=name)
-            amount = Decimal(amount.replace(",", "."))
             items.append(IngredientAmount(recipe=instance, 
                                           ingredient=ingredient, 
-                                          amount=amount))
+                                          amount=amount))                                 
         IngredientAmount.objects.bulk_create(items)
         self.save_m2m()
         return instance    

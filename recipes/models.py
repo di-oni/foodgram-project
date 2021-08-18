@@ -2,7 +2,11 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
 from django.db import models
 
+from decimal import Decimal
+
+
 User = get_user_model()
+
 
 class Ingredient(models.Model):
     """ Модель объекта "Ингредиент" """
@@ -90,12 +94,15 @@ class IngredientAmount(models.Model):
         "Количество",
         max_digits=10,
         decimal_places=1,
-        validators=[MinValueValidator(1)]
+        validators=[MinValueValidator(Decimal(0.1))]
     )
 
     class Meta:
         verbose_name = "Количество ингредиента"
         verbose_name_plural = "Количество ингредиента"
+
+    def __str__(self):
+        return f"{self.recipe}: {self.ingredient}, {self.amount}"
 
 
 class Follow(models.Model): 

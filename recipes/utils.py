@@ -12,11 +12,11 @@ def filtered_by_tags(request, recipes):
 def get_ingredients(request):
     """ Функция для получения ингредиентов из запроса """
     ingredients = {}
-    for key in request.POST:
+    for key in request:
         if key.startswith("nameIngredient"):
             count = key.split("_")[1]
-            value = request.POST[f"valueIngredient_{count}"]
-            ingredients[request.POST[key]] = value
+            value = request[f"valueIngredient_{count}"]
+            ingredients[request[key]] = value
     return ingredients
 
 
